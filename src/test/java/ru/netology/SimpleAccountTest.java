@@ -7,36 +7,31 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class SimpleAccountTest {
-   @Test
-    void testAdd() {
-        long amountArray[];
-        amountArray = new long[] {
+    SimpleAccount simpleAccount = new SimpleAccount(10000);
+    static long amountArray[];
+        @BeforeAll
+    static void setUp() {
+        amountArray = new long[]{
                 5000,
                 500,
                 3001
         };
+    }
+
+    @Test
+    void pay() {
         for (long amount : amountArray) {
-           Assertions.assertTrue( SimpleAccount.add(amount));
+            Assertions.assertTrue(simpleAccount.pay(amount));
         }
     }
 
-//    @Test
-//    void testAdd() {
-//    }
-
-//    @Test
-//    void pay() {
-//    }
-//
-//    @Test
-//    void transfer() {
-//    }
-
-//    @ParameterizedTest
-//    @ValueSource(longs = {
-//            1000,
-//            -500,
-//            3001
-//    });
-//    void valida
+    @ParameterizedTest
+    @ValueSource(longs = {
+            1000,
+            -500,
+            3001
+    })
+    void validateTestAdd(long value) {
+        Assertions.assertTrue(new SimpleAccount(0).add(value));
+    }
 }
